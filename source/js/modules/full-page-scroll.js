@@ -59,6 +59,8 @@ export default class FullPageScroll {
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     setTimeout(() => {
       this.screenElements[this.activeScreen].classList.add(`active`);
+      // eslint-disable-next-line no-console
+      console.log(`activeItem1`);
     }, 100);
   }
 
@@ -66,6 +68,8 @@ export default class FullPageScroll {
     const activeItem = Array.from(this.menuElements).find((item) => item.dataset.href === this.screenElements[this.activeScreen].id);
     if (activeItem) {
       this.menuElements.forEach((item) => item.classList.remove(`active`));
+      // eslint-disable-next-line no-console
+      console.log(`activeItem`, activeItem);
       activeItem.classList.add(`active`);
     }
   }
