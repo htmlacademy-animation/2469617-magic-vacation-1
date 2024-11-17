@@ -12,12 +12,13 @@ export default class FullPageScroll {
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
+    this.onWindowLoad = this.onWindowLoad.bind(this);
   }
 
   init() {
     document.addEventListener(`wheel`, throttle(this.onScrollHandler, this.THROTTLE_TIMEOUT, {trailing: true}));
     window.addEventListener(`popstate`, this.onUrlHashChengedHandler);
-
+    window.addEventListener(`load`, this.onWindowLoad);
     this.onUrlHashChanged();
   }
 
@@ -45,6 +46,17 @@ export default class FullPageScroll {
     this.changePageDisplay();
   }
 
+  onWindowLoad() {
+    const section = document.querySelector(`div.intro__content`);
+    section.classList.add(`intro__content-loaded`);
+    const logo = document.querySelector(`a.page-header__logo`);
+    logo.classList.add(`page-header__logo-loaded`);
+    const social = document.querySelector(`div.social-block`);
+    social.classList.add(`social-block--loaded`);
+    const links = document.querySelectorAll(`.js-menu-link`);
+    links.forEach((link) => link.classList.add(`loaded`));
+  }
+
   changePageDisplay() {
     this.changeVisibilityDisplay();
     this.changeActiveMenuItem();
@@ -59,8 +71,6 @@ export default class FullPageScroll {
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     setTimeout(() => {
       this.screenElements[this.activeScreen].classList.add(`active`);
-      // eslint-disable-next-line no-console
-      console.log(`activeItem1`);
     }, 100);
   }
 
@@ -68,8 +78,6 @@ export default class FullPageScroll {
     const activeItem = Array.from(this.menuElements).find((item) => item.dataset.href === this.screenElements[this.activeScreen].id);
     if (activeItem) {
       this.menuElements.forEach((item) => item.classList.remove(`active`));
-      // eslint-disable-next-line no-console
-      console.log(`activeItem`, activeItem);
       activeItem.classList.add(`active`);
     }
   }

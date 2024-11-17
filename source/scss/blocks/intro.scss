@@ -57,6 +57,15 @@
   align-items: flex-end;
   justify-content: space-between;
   padding-left: 6.3rem;
+  transform: translate(0, 50px);
+  opacity: 0;
+
+  &-loaded {
+      transform: translate(0, 0);
+      opacity: 1;
+      transition: all 6s;
+      transition-timing-function:cubic-bezier(0.17,0.67,0,1.05)
+  }
 
   @media (min-width: $stop-scaling) {
     padding-left: 63px;
@@ -86,12 +95,6 @@
   }
 }
 
-section.active .intro__message {
-  transform: translate(0, 0);
-  opacity: 1;
-  transition: all 3s;
-}
-
 .intro__message {
   flex: none;
   width: 50.9rem;
@@ -99,8 +102,6 @@ section.active .intro__message {
   text-transform: uppercase;
   font-size: 2.4rem;
   line-height: 1.27;
-  transform: translate(0, 20px);
-  opacity: 0;
 
   @media (min-width: $stop-scaling) {
     width: 509px;

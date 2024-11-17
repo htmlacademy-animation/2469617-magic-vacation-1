@@ -31,10 +31,20 @@
   position: relative;
   flex: none;
   top: -0.5rem;
+  left: -120px;
   display: block;
   padding: 1rem 0;
   width: 10rem;
   color: $c-light;
+  opacity: 0;
+
+  &-loaded {
+    left: 0;
+    opacity: 1;
+    transition: all 6s;
+    transition-timing-function:cubic-bezier(0.17,0.67,0,1.05)
+  }
+
 
   @media (min-width: $stop-scaling) {
     top: -5px;
@@ -236,22 +246,29 @@
     }
   }
 
+
   a {
     position: relative;
     display: block;
     color: inherit;
     padding: 0 0.5em 0.5em;
     text-decoration: none;
+    opacity: 1;
+
 
     &::after {
       content: "";
       position: absolute;
       bottom: 0;
-      width: 100%;
+      width: 10%;
       height: 2px;
       background-color: $c-light;
       display: none;
       left: 0;
+      transition-duration: 6s;
+      transition-timing-function:cubic-bezier(0.17,0.67,0,1.05);
+      transition-property: width;
+
 
       @media (max-width: $tablet) and (orientation: portrait) {
         left: 0;
@@ -264,6 +281,10 @@
         right: 0;
         background-color: $c-dark;
       }
+    }
+
+    &.loaded::after {
+      width: 100%
     }
 
     &.active {
